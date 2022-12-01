@@ -1,28 +1,14 @@
-//three arrays containing questions pertaining to each position
-const teamManagerQuestions = [
-  "Enter Team Manager's Name",
-  "Employee ID: ",
-  "Email Address: ",
-  "Office Number: ",
-];
-
-const engineerQuestions = [
-  "Enter Engineer's Name",
-  "Employee ID: ",
-  "Email Address: ",
-  "GitHub Username: ",
-];
-
-const internQuestions = [
-  "Enter Intern's Name",
-  "Employee ID: ",
-  "Email Address: ",
-  "School: ",
-];
-
-//require inquirer, file system, and local markdown doc
+//require inquirer, file system
 const fs = require("fs");
 const inquirer = require("inquirer");
+
+//require classes and subclasses
+const employee = require("./lib/employee");
+const manager = require("./lib/manager");
+const engineer = require("./lib/engineer");
+const intern = require("./lib/intern");
+
+//require html file that we will add names to
 const htmlGenerate = require("./dist/index.html");
 
 //function that will create the actual markdown doc with user generated information
