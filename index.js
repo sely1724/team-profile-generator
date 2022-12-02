@@ -114,16 +114,15 @@ function internOrEngineer() {
       },
     ])
     .then((response) => {
-      let positionChoice = response.name;
       if (response.internOrEngineer == "Intern") {
-        internDetails(positionChoice);
+        internDetails();
       } else {
-        engineerDetails(positionChoice);
+        engineerDetails();
       }
     });
 }
 
-function engineerDetails(positionChoice) {
+function engineerDetails() {
   inquirer
     .prompt([
       {
@@ -152,40 +151,42 @@ function engineerDetails(positionChoice) {
     ])
     .then((response) => {
       let engineerID = response.engineerID;
-      console.log(engineerID);
       engineerID = []; //maybe want an array of objects so we can know the overarching name of the index.
-      engineerID.push(
-        positionChoice,
-        response.engineerName,
-        response.engineerID,
-        response.engineerEmail
-      );
-      console.log();
+      engineerID.push({
+        position: "Engineer",
+        name: response.engineerName,
+        id: response.engineerID,
+        email: response.engineerEmail,
+        github: response.engineerDetails,
+      });
 
+      console.log(engineerID);
+      allEmployees.push(engineerID);
       addAdditionalEmployee();
-      return response;
+
+      //return response;
     });
 }
 
-function internDetails(positionChoice) {
+function internDetails() {
   inquirer
     .prompt([
       {
         type: "input",
-        name: "employeeName",
-        message: "What is the employee's name?",
+        name: "internName",
+        message: "What is the intern's name?",
       },
 
       {
         type: "input",
-        name: "employeeID",
-        message: "What is the employee's ID?",
+        name: "internID",
+        message: "What is the intern's ID?",
       },
 
       {
         type: "input",
-        name: "employeeEmail",
-        message: "What is the employee's email?",
+        name: "internEmail",
+        message: "What is the intern's email?",
       },
 
       {
@@ -195,6 +196,19 @@ function internDetails(positionChoice) {
       },
     ])
     .then((response) => {
+      let internID = response.engineerID;
+      internID = []; //maybe want an array of objects so we can know the overarching name of the index.
+      internID.push({
+        position: "Intern",
+        name: response.internName,
+        id: response.internID,
+        email: response.internEmail,
+        university: response.internDetails,
+      });
+
+      console.log(internID);
+      allEmployees.push(internID);
+
       addAdditionalEmployee();
       return response;
     });
