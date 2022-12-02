@@ -1,5 +1,6 @@
 //require inquirer, file system
 const fs = require("fs");
+const generateHTML = require("./util/generateHtml");
 const inquirer = require("inquirer");
 const allEmployees = [];
 
@@ -96,7 +97,8 @@ function addAdditionalEmployee() {
         //create object holding all employee information.  for each unique array we push up to object.
 
         printArrays();
-        //buildTeam();
+
+        buildTeam();
       }
     });
 }
@@ -208,11 +210,11 @@ function printArrays() {
   console.log(allEmployees);
 }
 
-// function buildTeam() {
-//   fs.writeFile(`index.html`, generateHTML(allEmployees), (error) =>
-//     error ? console.log(error) : console.log("HTML Build Complete")
-//   );
-// }
+function buildTeam() {
+  fs.writeFile(`index.html`, generateHTML(allEmployees), (error) =>
+    error ? console.log(error) : console.log("HTML file built")
+  );
+}
 
 //add manager once
 //add engineer and intern together.
