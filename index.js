@@ -96,7 +96,7 @@ function addAdditionalEmployee() {
         //create object holding all employee information.  for each unique array we push up to object.
 
         printArrays();
-        buildTeam();
+        //buildTeam();
       }
     });
 }
@@ -148,18 +148,14 @@ function engineerDetails() {
       },
     ])
     .then((response) => {
-      let engineerID = response.engineerID;
-      engineerID = []; //maybe want an array of objects so we can know the overarching name of the index.
-      engineerID.push({
-        position: "Engineer",
-        name: response.engineerName,
-        id: response.engineerID,
-        email: response.engineerEmail,
-        github: response.engineerDetails,
-      });
+      let engineer = new Engineer(
+        response.engineerName,
+        response.engineerID,
+        response.engineerEmail,
+        response.engineerDetails
+      );
 
-      console.log(engineerID);
-      allEmployees.push(engineerID);
+      allEmployees.push(engineer);
       addAdditionalEmployee();
 
       //return response;
@@ -194,21 +190,17 @@ function internDetails() {
       },
     ])
     .then((response) => {
-      let internID = response.engineerID;
-      internID = []; //maybe want an array of objects so we can know the overarching name of the index.
-      internID.push({
-        position: "Intern",
-        name: response.internName,
-        id: response.internID,
-        email: response.internEmail,
-        university: response.internDetails,
-      });
+      let intern = new Intern(
+        response.internName,
+        response.internID,
+        response.internEmail,
+        response.internDetails
+      );
 
-      console.log(internID);
-      allEmployees.push(internID);
+      allEmployees.push(intern);
 
       addAdditionalEmployee();
-      return response;
+      //return response;
     });
 }
 
@@ -216,11 +208,11 @@ function printArrays() {
   console.log(allEmployees);
 }
 
-function buildTeam() {
-  fs.writeFile(`index.html`, generateHTML(allEmployees), (error) =>
-    error ? console.log(error) : console.log("HTML Build Complete")
-  );
-}
+// function buildTeam() {
+//   fs.writeFile(`index.html`, generateHTML(allEmployees), (error) =>
+//     error ? console.log(error) : console.log("HTML Build Complete")
+//   );
+// }
 
 //add manager once
 //add engineer and intern together.
