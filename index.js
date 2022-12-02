@@ -1,6 +1,7 @@
 //require inquirer, file system
 const fs = require("fs");
 const inquirer = require("inquirer");
+const allEmployees = [];
 
 //require classes and subclasses
 const employee = require("./lib/employee");
@@ -32,41 +33,31 @@ function init() {
     .then((response) => {
       if (response.addManager === "yes") {
         const addManager = true;
-        employeeDetails();
+        managerDetails();
       }
     });
 }
 
-function employeeDetails() {
+function managerDetails() {
   inquirer
     .prompt([
       {
         type: "input",
-        name: "employeeName",
-        message: "What is the employee's name?",
+        name: "managerName",
+        message: "What is the manager's name?",
       },
 
       {
         type: "input",
-        name: "employeeID",
-        message: "What is the employee's ID?",
+        name: "managerID",
+        message: "What is the manager's ID?",
       },
 
       {
         type: "input",
-        name: "employeeEmail",
-        message: "What is the employee's email?",
+        name: "managerEmail",
+        message: "What is the manager's email?",
       },
-    ])
-    .then((response) => {
-      detailsManager();
-      return response;
-    });
-}
-
-function detailsManager() {
-  inquirer
-    .prompt([
       {
         type: "input",
         name: "managerOffice",
@@ -74,8 +65,20 @@ function detailsManager() {
       },
     ])
     .then((response) => {
+      let managerID = response.managerID;
+      managerID = []; //maybe want an array of objects so we can know the overarching name of the index.
+      managerID.push({
+        position: "Manager",
+        name: response.managerName,
+        id: response.managerID,
+        email: response.managerEmail,
+        officeNumber: response.managerOffice,
+      });
+      console.log(managerID);
+      allEmployees.push(managerID);
+      console.log(allEmployees);
       addAdditionalEmployee();
-      return response;
+      //return response;
     });
 }
 
@@ -92,6 +95,10 @@ function addAdditionalEmployee() {
     .then((response) => {
       if (response.addEmployee == "yes") {
         internOrEngineer();
+      } else {
+        //create object holding all employee information.  for each unique array we push up to object.
+
+        printArrays();
       }
     });
 }
@@ -107,33 +114,34 @@ function internOrEngineer() {
       },
     ])
     .then((response) => {
+      let positionChoice = response.name;
       if (response.internOrEngineer == "Intern") {
-        internDetails();
+        internDetails(positionChoice);
       } else {
-        engineerDetails();
+        engineerDetails(positionChoice);
       }
     });
 }
 
-function engineerDetails() {
+function engineerDetails(positionChoice) {
   inquirer
     .prompt([
       {
         type: "input",
-        name: "employeeName",
-        message: "What is the employee's name?",
+        name: "engineerName",
+        message: "What is the engineer's name?",
       },
 
       {
         type: "input",
-        name: "employeeID",
-        message: "What is the employee's ID?",
+        name: "engineerID",
+        message: "What is the engineer's ID?",
       },
 
       {
         type: "input",
-        name: "employeeEmail",
-        message: "What is the employee's email?",
+        name: "engineerEmail",
+        message: "What is the engineer's email?",
       },
 
       {
@@ -143,12 +151,23 @@ function engineerDetails() {
       },
     ])
     .then((response) => {
+      let engineerID = response.engineerID;
+      console.log(engineerID);
+      engineerID = []; //maybe want an array of objects so we can know the overarching name of the index.
+      engineerID.push(
+        positionChoice,
+        response.engineerName,
+        response.engineerID,
+        response.engineerEmail
+      );
+      console.log();
+
       addAdditionalEmployee();
       return response;
     });
 }
 
-function internDetails() {
+function internDetails(positionChoice) {
   inquirer
     .prompt([
       {
@@ -179,6 +198,10 @@ function internDetails() {
       addAdditionalEmployee();
       return response;
     });
+}
+
+function printArrays() {
+  console.log(allEmployees);
 }
 
 //add manager once
