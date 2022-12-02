@@ -107,20 +107,35 @@ function internOrEngineer() {
       },
     ])
     .then((response) => {
-      employeeDetails();
-      
-      .then(response) => {
       if (response.internOrEngineer == "Intern") {
         internDetails();
       } else {
         engineerDetails();
-      }}
+      }
     });
 }
 
 function engineerDetails() {
   inquirer
     .prompt([
+      {
+        type: "input",
+        name: "employeeName",
+        message: "What is the employee's name?",
+      },
+
+      {
+        type: "input",
+        name: "employeeID",
+        message: "What is the employee's ID?",
+      },
+
+      {
+        type: "input",
+        name: "employeeEmail",
+        message: "What is the employee's email?",
+      },
+
       {
         type: "input",
         name: "engineerDetails",
@@ -136,6 +151,24 @@ function engineerDetails() {
 function internDetails() {
   inquirer
     .prompt([
+      {
+        type: "input",
+        name: "employeeName",
+        message: "What is the employee's name?",
+      },
+
+      {
+        type: "input",
+        name: "employeeID",
+        message: "What is the employee's ID?",
+      },
+
+      {
+        type: "input",
+        name: "employeeEmail",
+        message: "What is the employee's email?",
+      },
+
       {
         type: "input",
         name: "internDetails",
