@@ -59,15 +59,13 @@ const generateTeam = (allEmployees) => {
       .filter((employee) => employee.getRole() === "Engineer")
       .map((engineer) => generateEngineer(engineer))
   );
-
+  return employeeData.join("");
   console.log(employeeData);
   console.log(allEmployees);
 };
 
 function finalizeData(allEmployees) {
   return `
-
-
   <!DOCTYPE html>
 <html lang="en">
   <head>
