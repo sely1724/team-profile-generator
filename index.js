@@ -66,15 +66,15 @@ function managerDetails() {
       },
     ])
     .then((response) => {
-      let manager = new Manager(
+      let manager1 = new Manager(
         response.managerName,
         response.managerID,
         response.managerEmail,
         response.managerOffice
       );
-      allEmployees.push(manager);
-      console.log("Manager added.");
-      console.log(allEmployees);
+      allEmployees.push(manager1);
+      //console.log("Manager added.");
+      //console.log(allEmployees);
       addAdditionalEmployee();
       //return response;
     });
@@ -207,7 +207,7 @@ function internDetails() {
 }
 
 function printArrays() {
-  console.log(allEmployees);
+  //console.log(allEmployees);
 }
 
 function buildTeam() {
