@@ -6,7 +6,7 @@ const generateTeam = (allEmployees) => {
       <h4 class="card-title">${manager.getName()}</h4>
       <h5 class="card-title">${manager.getRole()}</h5>
       <p>ID Number: ${manager.getId()}</p>
-      <p>Email: ${manager.getRole()}</p>
+      <p>Email:<a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></p>
       <p>Office Number: ${manager.getOfficeNumber()}</p>
     </div>
   </div> 
@@ -14,13 +14,13 @@ const generateTeam = (allEmployees) => {
   };
 
   const generateIntern = (intern) => {
-    return `
+    return ` 
     <div class="card">
     <div class="card-body">
       <h4 class="card-title">${intern.getName()}</h4>
       <h5 class="card-title">${intern.getRole()}</h5>
       <p>ID Number: ${intern.getId()}</p>
-      <p>Email: ${intern.getRole()}</p>
+      <p>Email:<a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></p>
       <p>University: ${intern.getSchool()}</p>
     </div>
   </div> 
@@ -34,8 +34,8 @@ const generateTeam = (allEmployees) => {
       <h4 class="card-title">${engineer.getName()}</h4>
       <h5 class="card-title">${engineer.getRole()}</h5>
       <p>ID Number: ${engineer.getId()}</p>
-      <p>Email: ${engineer.getRole()}</p>
-      <p>Github: ${engineer.getGithub()}</p>
+      <p>Email:<a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></p>
+      <p>Github:<a href="https://github.com/${engineer.getGithub()}"> ${engineer.getGithub()}</a> </p>
     </div>
   </div> 
     `;
@@ -60,8 +60,8 @@ const generateTeam = (allEmployees) => {
       .map((engineer) => generateEngineer(engineer))
   );
   return employeeData.join("");
-  console.log(employeeData);
-  console.log(allEmployees);
+  //console.log(employeeData);
+  //console.log(allEmployees);
 };
 
 function finalizeData(allEmployees) {
@@ -83,12 +83,14 @@ function finalizeData(allEmployees) {
 
   <body>
     <!--header-->
-    <header class="text-center">
-      <h1 class="mb-2">My Team</h1>
+    <header class="container-fluid bg-dark">
+      <div class="row justify-content-center">
+        <h1 class="text-white">My Team</h1>
+      </div>
     </header>
 
     <!--container for cards start-->
-    <section class="container-fluid">
+    <section class="container">
       <div class="card-deck">
   
   
