@@ -1,8 +1,7 @@
-//require inquirer, file system
+//require inquirer, file system, html generator
 const fs = require("fs");
 const generateHTML = require("./util/generateHtml");
 const inquirer = require("inquirer");
-const allEmployees = [];
 
 //require classes and subclasses
 const Employee = require("./lib/employee");
@@ -10,17 +9,10 @@ const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 
-//require html file that we will add names to
-//const htmlGenerate = require("./dist/index.html");
-//const { getSystemErrorName } = require("util");
+//create array to store all employee information
+const allEmployees = [];
 
-//function that will create the actual html???  doc with user generated information??
-// function writeToHTML???(README, renderedMarkdown) {
-//   fs.writeFile(README, renderedMarkdown, (err) =>
-//     err ? console.error(err) : console.log("README generated")
-//   );
-
-//initialize project.  Asks questions in the terminal
+//initialize project.  Asks user questions in the terminal
 function init() {
   inquirer
     .prompt([
@@ -39,6 +31,7 @@ function init() {
     });
 }
 
+//function to ask user for manager details
 function managerDetails() {
   inquirer
     .prompt([
@@ -73,13 +66,12 @@ function managerDetails() {
         response.managerOffice
       );
       allEmployees.push(manager1);
-      //console.log("Manager added.");
-      //console.log(allEmployees);
       addAdditionalEmployee();
-      //return response;
     });
 }
-
+//function that asks if user wants to add another employee
+//if yes calls intern or engineer function
+//if no calls build team function
 function addAdditionalEmployee() {
   inquirer
     .prompt([
@@ -94,15 +86,11 @@ function addAdditionalEmployee() {
       if (response.addEmployee == "yes") {
         internOrEngineer();
       } else {
-        //create object holding all employee information.  for each unique array we push up to object.
-
-        printArrays();
-
         buildTeam();
       }
     });
 }
-
+//function that asks whether the user wants the new employee to be an intern or engineer
 function internOrEngineer() {
   inquirer
     .prompt([
@@ -122,6 +110,7 @@ function internOrEngineer() {
     });
 }
 
+//function to ask user for engineer details
 function engineerDetails() {
   inquirer
     .prompt([
@@ -159,11 +148,10 @@ function engineerDetails() {
 
       allEmployees.push(engineer);
       addAdditionalEmployee();
-
-      //return response;
     });
 }
 
+//function to ask user for intern details
 function internDetails() {
   inquirer
     .prompt([
@@ -202,30 +190,14 @@ function internDetails() {
       allEmployees.push(intern);
 
       addAdditionalEmployee();
-      //return response;
     });
 }
-
-function printArrays() {
-  //console.log(allEmployees);
-}
-
+//function calls generatehtml file.  It passes it the allEmployees array and generates the index.html file
 function buildTeam() {
   fs.writeFile(`index.html`, generateHTML(allEmployees), (error) =>
     error ? console.log(error) : console.log("HTML file built")
   );
 }
-
-//add manager once
-//add engineer and intern together.
-
-//asynchronous function that acts when a response comes back.  Uses the data to create markdown file
-// .then((response) => {
-//  const name = new employee(response);
-//recall function? and say, user created please enter new employees information
-//const renderedMarkdown = markdownTemplate(response);
-//writeToFile(README, renderedMarkdown);
-// });
 
 init();
 
