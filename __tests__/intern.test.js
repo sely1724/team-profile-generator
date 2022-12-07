@@ -1,33 +1,40 @@
 const Intern = require("../lib/intern");
 
-test("Ensuring University Instance is created", () => {
-  const intern = new Intern(
-    "Dwight",
-    "1234",
-    "dwight@gmail.com",
-    "jacksonville"
-  );
+describe("Testing Intern Class", () => {
+  it("parameters are name, id, email, and university", () => {
+    const intern = new Intern(
+      "Dwight",
+      "1234",
+      "dwight@gmail.com",
+      "Michigan State"
+    );
 
-  expect(intern.school).toBe("jacksonville");
-});
+    expect(intern.name).toBe("Dwight");
+    expect(intern.employeeID).toBe("1234");
+    expect(intern.email).toBe("dwight@gmail.com");
+    expect(intern.school).toBe("Michigan State");
+  });
+  it("should call methods to get intern name, email, role, and University", () => {
+    //ARRANGE
+    const intern = new Intern(
+      "Dwight",
+      "1234",
+      "dwight@gmail.com",
+      "Michigan State"
+    );
 
-test("Ensuring user entered university can be fetched", () => {
-  const intern = new Intern(
-    "Dwight",
-    "1234",
-    "dwight@gmail.com",
-    "jacksonville"
-  );
+    //ACT
+    intern.getName();
+    intern.getId();
+    intern.getEmail();
+    intern.getSchool();
+    intern.getRole();
 
-  expect(intern.getSchool()).toBe("jacksonville");
-});
-
-test("Ensuring intern role can be fetched when new object created", () => {
-  const intern = new Intern(
-    "Dwight",
-    "1234",
-    "dwight@gmail.com",
-    "jacksonville"
-  );
-  expect(intern.getRole()).toBe("Intern");
+    //ASSERT
+    expect(intern.getName()).toBe("Dwight");
+    expect(intern.getId()).toBe("1234");
+    expect(intern.getEmail()).toBe("dwight@gmail.com");
+    expect(intern.getSchool()).toBe("Michigan State");
+    expect(intern.getRole()).toBe("Intern");
+  });
 });
