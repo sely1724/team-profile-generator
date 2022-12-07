@@ -28,7 +28,7 @@ const generateTeam = (allEmployees) => {
       <ul class="card-body list-unstyled">
       <li>ID Number: ${intern.getId()}</li>
       <li>Email:<a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></li>
-      <li>Office Number: ${intern.getSchool()}</li>
+      <li>University: ${intern.getSchool()}</li>
       </ul>
     </div>
   </div> 
@@ -46,7 +46,9 @@ const generateTeam = (allEmployees) => {
       <ul class="card-body list-unstyled">
       <li>ID Number: ${engineer.getId()}</li>
       <li>Email:<a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></li>
-      <li>Office Number: ${engineer.getGithub()}</li>
+      <li>GitHub Username: <a href= "https://github.com/${engineer.getGithub()}">${engineer.getGithub()}</a></li>
+
+  
       </ul>
     </div>
   </div> 
