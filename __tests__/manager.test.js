@@ -10,14 +10,17 @@ describe("Testing Manager Class", () => {
     expect(manager.officeNumber).toBe("108");
   });
   it("should call methods to get intern name, email, role, and University", () => {
+    //ARRANGE
     const manager = new Manager("Dwight", "1234", "dwight@gmail.com", "108");
 
+    //ACT
     manager.getName();
     manager.getId();
     manager.getEmail();
     manager.getOfficeNumber();
     manager.getRole();
 
+    //ASSERT
     expect(manager.getName()).toBe("Dwight");
     expect(manager.getId()).toBe("1234");
     expect(manager.getEmail()).toBe("dwight@gmail.com");
